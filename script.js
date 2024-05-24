@@ -1,6 +1,5 @@
 let productList = [];
 let productId = 1;
-// let cards = [];
 
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -52,6 +51,7 @@ function displayUpload(product) {
   displaySection.appendChild(card);
 }
 
+// 3.2
 function chooseProduct(event) {
   const checkbox = event.target;
   const uploadId = parseInt(checkbox.getAttribute("data-id"));
@@ -71,7 +71,7 @@ document.getElementById("addBtn").addEventListener("click", () => {
 
 function displayCart(products) {
   const displayCart = document.getElementById("displayCart");
-  displayCart.innerHTML = ""; // เคลียร์การแสดงผลเก่าก่อนที่จะแสดงใหม่
+  displayCart.innerHTML = "";
 
   products.forEach((product) => {
     const card = document.createElement("div");
@@ -79,7 +79,6 @@ function displayCart(products) {
 
     card.innerHTML = `
       <div class="flex items-center space-x-4">
-        <input data-id="${product.id}" onchange="calculatePrice(event)" type="checkbox" class="product-checkbox" />
         <img src="${product.image}" alt="${product.productName}" class="w-16 h-16 object-cover rounded" />
         <div>
           <h3 class="font-bold">${product.productName}</h3>
@@ -92,17 +91,8 @@ function displayCart(products) {
   });
 }
 
-function calculatePrice(event) {
-  const checkbox = event.target;
-  const uploadId = parseInt(checkbox.getAttribute("data-id"));
-  const product = productList.find((product) => product.id === uploadId);
+// 3.3
 
-  if (checkbox.checked) {
-    product.checked = true;
-  } else {
-    product.checked = false;
-  }
-}
 document.getElementById("calculatePriceBtn").addEventListener("click", () => {
   const totalPrice = calculateTotalPrice();
   document.getElementById(
